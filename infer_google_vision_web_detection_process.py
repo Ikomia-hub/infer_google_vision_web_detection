@@ -1,5 +1,5 @@
 import copy
-from ikomia import core, dataprocess
+from ikomia import core, dataprocess, utils
 from google.cloud import vision
 import os
 import io
@@ -17,12 +17,14 @@ class InferGoogleVisionWebDetectionParam(core.CWorkflowTaskParam):
         # Place default value initialization here
         self.google_application_credentials = ''
         self.output_folder = str(os.path.join(os.path.dirname(os.path.realpath(__file__)), "output"))
+        self.include_geo_results = False
 
     def set_values(self, params):
         # Set parameters values from Ikomia Studio or API
         # Parameters values are stored as string and accessible like a python dict
         self.google_application_credentials = str(params["google_application_credentials"])
         self.output_folder = str(params["output_folder"])
+        self.include_geo_results = utils.strtobool(params["cuda"])
 
 
 
@@ -32,6 +34,8 @@ class InferGoogleVisionWebDetectionParam(core.CWorkflowTaskParam):
         params = {}
         params["google_application_credentials"] = str(self.google_application_credentials)
         params["output_folder"] = str(self.output_folder)
+        params["include_geo_results"] = str(self.include_geo_results)
+
 
 # --------------------
 # - Class which implements the algorithm
@@ -79,7 +83,8 @@ class InferGoogleVisionWebDetection(dataprocess.CClassificationTask):
         src_image = src_image[..., ::-1] # Convert to bgr
         is_success, image_buffer = cv2.imencode(".jpg", src_image)
         byte_stream = io.BytesIO(image_buffer)
-
+        web_detection_params = vision.WebDetectionParams(include_geo_results=param.include_geo_results)
+        image_context = vision.ImageContext(web_detection_params=web_detection_params)
         response = self.client.web_detection(image=byte_stream)
 
         if response.error.message:

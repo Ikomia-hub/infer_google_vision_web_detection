@@ -84,6 +84,25 @@ Ikomia Studio offers a friendly UI with the same features as the API.
 ## :pencil: Set algorithm parameters
 
 - **output_folder** (str): Specify the destination for saving the output data in JSON format. By default, the output will be stored in 'User/Ikomia/Plugins/Python/infer_google_vision_web_detection/output'
+- **include_geo_results** (bool) - default 'False': The Vision API can access geotag metadata in your image files to return more relevant web entities and pages. To allow geotag usage, specify 'includeGeoResults': true in your request.
+
+```python
+from ikomia.dataprocess.workflow import Workflow
+
+# Init your workflow
+wf = Workflow()
+
+# Add algorithm
+algo = wf.add_task(name="infer_google_vision_web_detection", auto_connect=True)
+
+algo.set_parameters({
+    "param1": "value1",
+    "param2": "value2",
+    ...
+})
+
+```
+
 
 ## :mag: Explore algorithm outputs
 

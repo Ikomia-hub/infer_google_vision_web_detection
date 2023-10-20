@@ -40,7 +40,11 @@ class InferGoogleVisionWebDetectionWidget(core.CWorkflowTaskWidget):
             tooltip="Select folder",
             mode=QFileDialog.Directory
         )
-
+ 
+        # Geo tag
+        self.check_geo_results = pyqtutils.append_check(
+            self.grid_layout, "Include geo results", self.parameters.include_geo_results)
+    
         # Set widget layout
         self.set_layout(layout_ptr)
 
@@ -48,7 +52,7 @@ class InferGoogleVisionWebDetectionWidget(core.CWorkflowTaskWidget):
         # Apply button clicked slot
         self.parameters.google_application_credentials = self.browse_credentials.path
         self.parameters.output_folder = self.browse_out_folder.path
-
+        self.parameters.include_geo_results = self.check_geo_results.isChecked()
 
         # Send signal to launch the algorithm main function
         self.emit_apply(self.parameters) 
