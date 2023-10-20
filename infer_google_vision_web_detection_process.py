@@ -85,7 +85,7 @@ class InferGoogleVisionWebDetection(dataprocess.CClassificationTask):
         byte_stream = io.BytesIO(image_buffer)
         web_detection_params = vision.WebDetectionParams(include_geo_results=param.include_geo_results)
         image_context = vision.ImageContext(web_detection_params=web_detection_params)
-        response = self.client.web_detection(image=byte_stream)
+        response = self.client.web_detection(image=byte_stream, image_context=image_context)
 
         if response.error.message:
             raise Exception(
