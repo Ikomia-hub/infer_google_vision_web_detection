@@ -10,7 +10,7 @@
     <a href="https://app.ikomia.ai/hub/">
         <img alt="Website" src="https://img.shields.io/website/http/app.ikomia.ai/en.svg?down_color=red&down_message=offline&up_message=online">
     </a>
-    <a href="https://github.com/Ikomia-hub/infer_google_vision_web_detection/blob/main/LICENSE.md">
+    <a href="https://github.com/Ikomia-hub/infer_google_vision_web_detection/blob/main/LICENSE">
         <img alt="GitHub" src="https://img.shields.io/github/license/Ikomia-hub/infer_google_vision_web_detection.svg?color=blue">
     </a>    
     <br>
@@ -30,7 +30,7 @@ Web Detection detects Web references to an image.
 **Please refer to the 'Advanced Usage' section for guidance on how to set these up.**
 
 
-![web detection illustration]((https://raw.githubusercontent.com/Ikomia-hub/infer_google_vision_web_detection/main/icons/output.png))
+![web detection illustration](https://raw.githubusercontent.com/Ikomia-hub/infer_google_vision_web_detection/main/images/output.PNG)
 
 
 
