@@ -6,6 +6,7 @@ import io
 import cv2
 import json
 
+
 # --------------------
 # - Class to handle the algorithm parameters
 # - Inherits PyCore.CWorkflowTaskParam from Ikomia API
@@ -24,17 +25,17 @@ class InferGoogleVisionWebDetectionParam(core.CWorkflowTaskParam):
         # Parameters values are stored as string and accessible like a python dict
         self.google_application_credentials = str(params["google_application_credentials"])
         self.output_folder = str(params["output_folder"])
-        self.include_geo_results = utils.strtobool(params["cuda"])
-
-
+        self.include_geo_results = utils.strtobool(params["include_geo_results"])
 
     def get_values(self):
         # Send parameters values to Ikomia Studio or API
         # Create the specific dict structure (string container)
-        params = {}
-        params["google_application_credentials"] = str(self.google_application_credentials)
-        params["output_folder"] = str(self.output_folder)
-        params["include_geo_results"] = str(self.include_geo_results)
+        params = {
+            "google_application_credentials": str(self.google_application_credentials),
+            "output_folder": str(self.output_folder),
+            "include_geo_results": str(self.include_geo_results)
+        }
+        return params
 
 
 # --------------------
@@ -176,7 +177,7 @@ class InferGoogleVisionWebDetectionFactory(dataprocess.CTaskFactory):
         # relative path -> as displayed in Ikomia Studio algorithm tree
         self.info.icon_path = "images/cloud.png"
         self.info.path = "Plugins/Python/Other"
-        self.info.version = "1.0.0"
+        self.info.version = "1.0.1"
         self.info.authors = "Google"
         self.info.article = ""
         self.info.journal = ""
